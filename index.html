@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="五上英语">
+<meta name="theme-color" content="#f6f4ef">
+<title>五年级上册英语 · 在线练习</title>
+<style>
+:root{
+  --ink:#1f2328; --sub:#5b6470; --line:#e3e6ea; --bg:#f6f4ef; --card:#fff;
+  --red:#9e2b25; --red2:#c0392b; --green:#1a7f4b; --green-bg:#e9f6ef;
+  --red-bg:#fdecea; --amber:#8a5a12; --amber-bg:#fdf3e2; --blue:#1f4e79;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7;font-size:16px;padding-bottom:env(safe-area-inset-bottom)}
+header{position:sticky;top:0;z-index:30;background:rgba(246,244,239,.96);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.hd{max-width:880px;margin:0 auto;padding:10px 16px 6px;display:flex;align-items:center;gap:10px}
+.hd h1{font-size:17px;margin:0;font-weight:800;letter-spacing:.4px}
+.hd .sp{flex:1}
+.hd button{font:inherit;font-size:13px;border:1px solid var(--line);background:#fff;color:var(--sub);
+  border-radius:8px;padding:5px 10px;cursor:pointer}
+nav{max-width:880px;margin:0 auto;padding:0 16px 10px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{white-space:nowrap;font:inherit;font-size:14px;border:1px solid var(--line);
+  background:#fff;color:var(--sub);border-radius:999px;padding:6px 14px;cursor:pointer}
+nav button.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+main{max-width:880px;margin:0 auto;padding:16px 16px 96px}
+h2.t{font-size:19px;font-weight:800;margin:6px 0 4px;color:var(--red)}
+p.tip{font-size:13px;color:var(--sub);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:0 0 12px}
+.fld{margin:0 0 14px}
+.fld>label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;max-height:260px;overflow-y:auto;padding:2px}
+.chip{font-size:13.5px;border:1px solid var(--line);background:#fcfcfb;color:var(--ink);
+  border-radius:999px;padding:7px 13px;cursor:pointer;user-select:none;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.chip small{opacity:.7;margin-left:4px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{flex:1 1 auto;min-width:86px;font:inherit;font-size:14px;border:1px solid var(--line);
+  background:#fcfcfb;color:var(--sub);padding:10px 8px;cursor:pointer;border-radius:10px}
+.seg button.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+.seg button:disabled{opacity:.4}
+#seg-group button{flex:0 1 auto}
+select{font:inherit;font-size:15px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;
+  background:#fcfcfb;width:100%}
+button.primary{font:inherit;font-size:16px;font-weight:800;background:var(--red);color:#fff;border:0;
+  border-radius:12px;padding:13px 20px;width:100%;cursor:pointer;letter-spacing:1px}
+button.primary:disabled{opacity:.45}
+button.ghost{font:inherit;font-size:14px;background:#fff;color:var(--sub);border:1px solid var(--line);
+  border-radius:10px;padding:9px 16px;cursor:pointer}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.bar{height:6px;border-radius:99px;background:#e8e5df;overflow:hidden;margin:0 0 12px}
+.bar i{display:block;height:100%;background:var(--red);width:0;transition:.25s}
+.pstat{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin-bottom:6px}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;color:var(--ink)}
+.timer.warn{color:var(--red2)}
+.passage{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.passage summary{font-weight:700;font-size:13.5px;color:var(--sub);cursor:pointer;list-style:none}
+.passage summary::-webkit-details-marker{display:none}
+.passage summary::before{content:"▸ ";color:var(--red)}
+.passage[open] summary::before{content:"▾ "}
+.passage .body{max-height:42vh;overflow:auto;margin-top:8px}
+.passage p{margin:0 0 8px;text-indent:2em;font-size:15px}
+.q{font-size:17px;margin:0 0 12px;white-space:pre-wrap;font-weight:600;line-height:1.65}
+.qno{color:var(--red);margin-right:6px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;
+  padding:11px 13px;cursor:pointer;background:#fcfcfb;transition:.15s;font-size:15.5px}
+.opt:active{transform:scale(.995)}
+.opt .k{font-weight:800;color:var(--sub);min-width:18px}
+.opt.sel{border-color:var(--red);background:#fdf6f5}
+.opt.right{border-color:var(--green);background:var(--green-bg)}
+.opt.wrong{border-color:var(--red2);background:var(--red-bg)}
+input.fill{width:100%;font:inherit;font-size:16px;padding:12px 13px;border:1px solid var(--line);
+  border-radius:11px;background:#fcfcfb}
+textarea.open{width:100%;min-height:90px;font:inherit;font-size:15.5px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:11px;background:#fcfcfb;resize:vertical}
+.fb{font-size:14px;margin-top:10px;padding:9px 11px;border-radius:9px;display:none;white-space:pre-wrap;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:var(--green-bg);color:var(--green)}
+.fb.no{background:var(--red-bg);color:#a2231b}
+.fb.ref{background:var(--amber-bg);color:var(--amber)}
+.res{display:flex;gap:10px;text-align:center;margin:6px 0 16px}
+.res div{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 6px}
+.res b{display:block;font-size:24px;color:var(--red);font-weight:800}
+.res span{font-size:12px;color:var(--sub)}
+.rlist{font-size:14px}
+.ritem{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.ritem:last-child{border-bottom:0}
+.ritem .mark{font-weight:800;width:20px;flex:none}
+.ritem.ok .mark{color:var(--green)}
+.ritem.no .mark{color:var(--red2)}
+.ritem .txt{flex:1;color:var(--ink)}
+.ritem .ans{font-size:12.5px;color:var(--sub);margin-top:2px}
+.hist{font-size:13.5px;color:var(--sub);padding:6px 0;border-bottom:1px dashed var(--line)}
+.empty{color:var(--sub);text-align:center;padding:44px 10px;font-size:15px}
+footer{max-width:880px;margin:0 auto;padding:0 16px 30px;font-size:12.5px;color:var(--sub)}
+@media (max-width:520px){body{font-size:15.5px}.card{padding:12px 13px}.q{font-size:16.5px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <h1 id="title">五上英语 · 在线练习</h1>
+    <span class="sp"></span>
+    <button id="btn-reset">清空记录</button>
+  </div>
+  <nav id="tabs"></nav>
+</header>
+<main id="main"></main>
+<footer>题目与答案为练习用；主观题请对照参考答案自评。记录保存在本机浏览器，换设备不同步。</footer>
+<script>
+const DATA = {"title": "五上英语 · 在线练习", "sections": [{"id": "phonics", "title": "一、语音辨析（判断每组读音是否相同，相同写 S，不同写 D）", "tip": "先想这个字母组合在单词里发什么音，再比。", "items": [{"q": "tea　eat", "type": "fill", "a": "S", "e": "ea 都发 /iː/", "options": []}, {"q": "bread　season", "type": "fill", "a": "D", "e": "bread 的 ea 发 /e/，season 的 ea 发 /iː/", "options": []}, {"q": "sheep　bee", "type": "fill", "a": "S", "e": "ee 都发 /iː/", "options": []}, {"q": "rain　said", "type": "fill", "a": "D", "e": "rain 的 ai 发 /eɪ/，said 的 ai 发 /e/", "options": []}, {"q": "day　play", "type": "fill", "a": "S", "e": "ay 都发 /eɪ/", "options": []}, {"q": "night　eight", "type": "fill", "a": "D", "e": "night 的 igh 发 /aɪ/，eight 的 eigh 发 /eɪ/", "options": []}, {"q": "pie　piece", "type": "fill", "a": "D", "e": "pie 的 ie 发 /aɪ/，piece 的 ie 发 /iː/", "options": []}, {"q": "coat　snow", "type": "fill", "a": "S", "e": "oa 和 ow 都发 /əʊ/", "options": []}, {"q": "book　food", "type": "fill", "a": "D", "e": "book 的 oo 发 /ʊ/，food 的 oo 发 /uː/", "options": []}, {"q": "walk　tall", "type": "fill", "a": "S", "e": "al 都发 /ɔː/", "options": []}, {"q": "draw　saw", "type": "fill", "a": "S", "e": "aw 都发 /ɔː/", "options": []}, {"q": "autumn　author", "type": "fill", "a": "S", "e": "au 都发 /ɔː/", "options": []}, {"q": "cow　know", "type": "fill", "a": "D", "e": "cow 的 ow 发 /aʊ/，know 的 ow 发 /əʊ/", "options": []}, {"q": "free　tree", "type": "fill", "a": "S", "e": "ee 都发 /iː/", "options": []}, {"q": "train　wait", "type": "fill", "a": "S", "e": "ai 都发 /eɪ/", "options": []}]}, {"id": "words", "title": "二、词汇", "tip": "中英互译、词形变化、首字母填空。", "items": [{"q": "聪明的；聪颖的（英文）", "type": "fill", "a": "clever", "e": "Unit 1", "options": []}, {"q": "擅长……（英文短语）", "type": "fill", "a": "be good at", "e": "Unit 1", "options": []}, {"q": "机器人（英文）", "type": "fill", "a": "robot", "e": "Unit 1", "options": []}, {"q": "难过的（英文）", "type": "fill", "a": "sad", "e": "Unit 2", "options": []}, {"q": "同意的（英文）", "type": "fill", "a": "agree", "e": "Unit 2", "options": []}, {"q": "星期三（英文）", "type": "fill", "a": "Wednesday", "e": "Unit 3，注意 d 不发音", "options": []}, {"q": "课；一节课（英文）", "type": "fill", "a": "lesson", "e": "Unit 3", "options": []}, {"q": "应该（英文）", "type": "fill", "a": "should", "e": "Unit 4", "options": []}, {"q": "习惯（英文）", "type": "fill", "a": "habit", "e": "Unit 4", "options": []}, {"q": "饺子（英文）", "type": "fill", "a": "dumpling", "e": "Unit 5", "options": []}, {"q": "饥饿的（英文）", "type": "fill", "a": "hungry", "e": "Unit 5", "options": []}, {"q": "瀑布（英文）", "type": "fill", "a": "waterfall", "e": "Unit 6", "options": []}, {"q": "危险的（英文）", "type": "fill", "a": "dangerous", "e": "Unit 6", "options": []}, {"q": "wonderful（中文）", "type": "fill", "a": "精彩的；绝妙的", "e": "Unit 1", "options": []}, {"q": "excited（中文）", "type": "fill", "a": "激动的；兴奋的", "e": "Unit 2", "options": []}, {"q": "usually（中文）", "type": "fill", "a": "通常地", "e": "Unit 3", "options": []}, {"q": "enough（中文）", "type": "fill", "a": "足够的", "e": "Unit 4", "options": []}, {"q": "different（中文）", "type": "fill", "a": "不同的", "e": "Unit 5", "options": []}, {"q": "tooth 的复数", "type": "fill", "a": "teeth", "e": "不规则变化", "options": []}, {"q": "play 的第三人称单数", "type": "fill", "a": "plays", "e": "直接加 s", "options": []}, {"q": "do 的第三人称单数", "type": "fill", "a": "does", "e": "加 es", "options": []}, {"q": "watch 的第三人称单数", "type": "fill", "a": "watches", "e": "以 ch 结尾加 es", "options": []}, {"q": "study 的第三人称单数", "type": "fill", "a": "studies", "e": "辅音字母+y，变 y 为 i 加 es", "options": []}, {"q": "brush 的第三人称单数", "type": "fill", "a": "brushes", "e": "以 sh 结尾加 es", "options": []}, {"q": "swim 的 -ing 形式", "type": "fill", "a": "swimming", "e": "双写 m 加 ing", "options": []}, {"q": "run 的 -ing 形式", "type": "fill", "a": "running", "e": "双写 n 加 ing", "options": []}, {"q": "dance 的 -ing 形式", "type": "fill", "a": "dancing", "e": "去掉 e 加 ing", "options": []}, {"q": "make 的 -ing 形式", "type": "fill", "a": "making", "e": "去掉 e 加 ing", "options": []}, {"q": "He is good at s______. 他擅长科学。", "type": "fill", "a": "science", "e": "首字母提示", "options": []}, {"q": "I have a PE l______ on Monday. 我周一有一节体育课。", "type": "fill", "a": "lesson", "e": "首字母提示", "options": []}, {"q": "Brush your t______ twice a day. 一天刷两次牙。", "type": "fill", "a": "teeth", "e": "首字母提示，注意复数", "options": []}, {"q": "Don't play on the p______ so often. 别这么频繁玩手机。", "type": "fill", "a": "phone", "e": "首字母提示", "options": []}, {"q": "There is a w______ in the forest. 森林里有一条瀑布。", "type": "fill", "a": "waterfall", "e": "首字母提示", "options": []}]}, {"id": "choice", "title": "三、单项选择", "tip": "每题只有一个正确答案，注意时态和三单。", "items": [{"q": "— What's she like?　— She ______ kind.", "type": "choice", "options": ["are", "look", "is"], "a": 2, "e": "主语 she 用 is"}, {"q": "He can ______ the piano.", "type": "choice", "options": ["play", "plays", "playing"], "a": 0, "e": "can 后接动词原形"}, {"q": "My sister is good at ______.", "type": "choice", "options": ["sing", "singing", "sings"], "a": 1, "e": "be good at 后接动名词"}, {"q": "— Can you make robots?　— No, I ______.", "type": "choice", "options": ["can", "don't", "can't"], "a": 2, "e": "否定回答用 can't"}, {"q": "I usually go to school ______ Monday.", "type": "choice", "options": ["on", "at", "in"], "a": 0, "e": "具体某一天用 on"}, {"q": "— What do you have ______ Fridays?　— I have maths and English.", "type": "choice", "options": ["at", "in", "on"], "a": 2, "e": "星期前用 on"}, {"q": "She ______ her homework every evening.", "type": "choice", "options": ["do", "doing", "does"], "a": 2, "e": "三单用 does"}, {"q": "— Does he like PE?　— Yes, he ______.", "type": "choice", "options": ["do", "is", "does"], "a": 2, "e": "does 提问用 does 回答"}, {"q": "You ______ eat more vegetables.", "type": "choice", "options": ["should to", "shoulds", "should"], "a": 2, "e": "should 后接动词原形"}, {"q": "You shouldn't ______ on a phone so often.", "type": "choice", "options": ["plays", "play", "playing"], "a": 1, "e": "shouldn't 后接动词原形"}, {"q": "— What would you like ______?　— I'd like some beef.", "type": "choice", "options": ["eating", "eat", "to eat"], "a": 2, "e": "would like to do sth"}, {"q": "There ______ a book and two pens on the desk.", "type": "choice", "options": ["be", "are", "is"], "a": 2, "e": "就近原则，离 be 最近的是 a book"}, {"q": "______ there any fish in the river?", "type": "choice", "options": ["Do", "Are", "Is"], "a": 1, "e": "fish 在这里作复数，用 Are"}, {"q": "There aren't ______ apples in the basket.", "type": "choice", "options": ["a", "some", "any"], "a": 2, "e": "否定句用 any"}, {"q": "I brush my teeth ______ a day.", "type": "choice", "options": ["twice", "two", "second"], "a": 0, "e": "twice a day 一天两次"}, {"q": "The film is very ______.", "type": "choice", "options": ["exciting", "excited", "excite"], "a": 0, "e": "修饰事物用 exciting"}, {"q": "I'm ______ about the test.", "type": "choice", "options": ["worries", "worried", "worry"], "a": 1, "e": "be worried about 担心"}, {"q": "— How do you feel?　— I ______ happy.", "type": "choice", "options": ["feels", "feel", "feeling"], "a": 1, "e": "主语 I 用动词原形"}, {"q": "Why not ______ to the park?", "type": "choice", "options": ["going", "go", "goes"], "a": 1, "e": "Why not + 动词原形"}, {"q": "He is angry ______ me.", "type": "choice", "options": ["to", "at", "with"], "a": 2, "e": "be angry with sb."}, {"q": "______ you jump rope?　— Yes, I can.", "type": "choice", "options": ["Do", "Can", "Are"], "a": 1, "e": "回答用 can，说明问句用 Can"}, {"q": "My favourite ______ is music.", "type": "choice", "options": ["subject", "class", "lesson"], "a": 0, "e": "科目用 subject"}, {"q": "We have four ______ in the morning.", "type": "choice", "options": ["lessons", "lesson", "lesson's"], "a": 0, "e": "four 后接复数"}, {"q": "There will ______ heavy rain tomorrow.", "type": "choice", "options": ["be", "have", "is"], "a": 0, "e": "will 后接动词原形 be"}, {"q": "I'd like ______ water.", "type": "choice", "options": ["some", "an", "a"], "a": 0, "e": "water 不可数，用 some"}, {"q": "Look! The children ______ football.", "type": "choice", "options": ["plays", "play", "are playing"], "a": 2, "e": "Look! 提示现在进行时"}, {"q": "Let's ______ a walk after dinner.", "type": "choice", "options": ["taking", "takes", "take"], "a": 2, "e": "Let's 后接动词原形"}, {"q": "She often ______ TV on Sundays.", "type": "choice", "options": ["watch", "watching", "watches"], "a": 2, "e": "三单加 es"}, {"q": "— ______ is the weather like?　— It's fine.", "type": "choice", "options": ["Where", "What", "How"], "a": 1, "e": "What's the weather like?"}, {"q": "Be careful ______ the fire.", "type": "choice", "options": ["to", "with", "of"], "a": 2, "e": "be careful of 小心"}, {"q": "My birthday is ______ May.", "type": "choice", "options": ["at", "on", "in"], "a": 2, "e": "月份前用 in"}, {"q": "He ______ to school by bike every day.", "type": "choice", "options": ["go", "going", "goes"], "a": 2, "e": "三单加 es"}, {"q": "— Whose book is this?　— It's ______.", "type": "choice", "options": ["mine", "my", "me"], "a": 0, "e": "名词性物主代词 mine"}, {"q": "These ______ are from Australia.", "type": "choice", "options": ["player", "players", "player's"], "a": 1, "e": "These 后接复数"}, {"q": "I can sing ______ English song.", "type": "choice", "options": ["the", "an", "a"], "a": 1, "e": "English 以元音音素开头，用 an"}, {"q": "We should ______ our hands before meals.", "type": "choice", "options": ["washing", "wash", "washes"], "a": 1, "e": "should 后接动词原形"}, {"q": "— What's the matter?　— I ______ a cold.", "type": "choice", "options": ["am", "has", "have"], "a": 2, "e": "have a cold 感冒"}, {"q": "There are many ______ in the forest.", "type": "choice", "options": ["tree", "trees", "tree's"], "a": 1, "e": "many 后接复数"}, {"q": "— Would you like some tea?　— ______.", "type": "choice", "options": ["No, I don't", "Yes, I would", "Yes, please"], "a": 2, "e": "Would you like...? 用 Yes, please. 回答"}, {"q": "It's important ______ listen to each other.", "type": "choice", "options": ["for", "to", "of"], "a": 1, "e": "It's important to do sth"}]}, {"id": "speak", "title": "四、情景交际（选出最恰当的一句）", "tip": "先看问句的关键词，再选答句。", "items": [{"q": "你想知道同学的朋友长什么样，应该问：", "type": "choice", "options": ["How old is your friend?", "What's your friend like?", "Where is your friend?"], "a": 1, "e": "What's ... like? 询问外貌或性格"}, {"q": "同学说“I'm sad.”，你应该说：", "type": "choice", "options": ["How old are you?", "Where are you from?", "What's the matter?"], "a": 2, "e": "What's the matter? 问“怎么了”"}, {"q": "你想提议一起去公园：", "type": "choice", "options": ["Why not go to the park?", "Who is in the park?", "What's the park?"], "a": 0, "e": "Why not + 动词原形 表示建议"}, {"q": "你想问对方星期三有什么课：", "type": "choice", "options": ["What do you have on Wednesdays?", "When is Wednesday?", "What day is it today?"], "a": 0, "e": "询问课程用 What do you have on ...?"}, {"q": "你想问同学周末通常做什么：", "type": "choice", "options": ["What do you usually do at the weekend?", "Where do you live?", "How are you?"], "a": 0, "e": "usually 对应“通常”"}, {"q": "你想劝同学少玩手机：", "type": "choice", "options": ["Let's play on the phone.", "You can play more.", "You shouldn't play on a phone so often."], "a": 2, "e": "shouldn't 表示“不应该”"}, {"q": "你想问对方想吃什么：", "type": "choice", "options": ["What do you like?", "Do you eat breakfast?", "What would you like to eat?"], "a": 2, "e": "What would you like to eat?"}, {"q": "你想知道森林里有没有瀑布：", "type": "choice", "options": ["There is a waterfall.", "Is there a waterfall in the forest?", "Where is the waterfall?"], "a": 1, "e": "询问“有没有”用 Is there ...?"}, {"q": "别人帮了你，你应该说：", "type": "choice", "options": ["You're welcome.", "Thank you.", "Sorry."], "a": 1, "e": "感谢用 Thank you."}, {"q": "别人向你道歉，你应该说：", "type": "choice", "options": ["That's OK.", "Thank you.", "Me too."], "a": 0, "e": "回应道歉用 That's OK."}, {"q": "你想问今天的天气怎么样：", "type": "choice", "options": ["What's the weather like?", "How are you?", "What day is it?"], "a": 0, "e": "What's the weather like? 问天气"}, {"q": "你想知道对方会不会游泳：", "type": "choice", "options": ["Do you swim?", "Are you swim?", "Can you swim?"], "a": 2, "e": "能力用 can"}, {"q": "见到新同学，你自我介绍后可以说：", "type": "choice", "options": ["Goodbye.", "How old are you?", "Nice to meet you."], "a": 2, "e": "初次见面用 Nice to meet you."}, {"q": "你想提醒别人小心火：", "type": "choice", "options": ["Let's make a fire.", "Be careful of the fire.", "The fire is beautiful."], "a": 1, "e": "be careful of 小心……"}, {"q": "你想建议对方早点睡觉：", "type": "choice", "options": ["You can watch TV.", "You should go to bed early.", "You should get up early."], "a": 1, "e": "go to bed early 早睡"}]}, {"id": "order", "title": "五、连词成句（注意大小写和标点）", "tip": "先找主语，再找动词，最后放其他成分。写完自己读一遍通不通。", "items": [{"q": "is / he / what / like (?)", "type": "open", "a": "What is he like?", "e": "疑问词 What 放句首，like 是介词。", "options": []}, {"q": "can / play / he / piano / the (.)", "type": "open", "a": "He can play the piano.", "e": "乐器前加 the。", "options": []}, {"q": "good / she / is / at / singing (.)", "type": "open", "a": "She is good at singing.", "e": "be good at + 动名词。", "options": []}, {"q": "you / can / robots / make (?)", "type": "open", "a": "Can you make robots?", "e": "情态动词 Can 提前构成疑问句。", "options": []}, {"q": "do / what / you / on / have / Mondays (?)", "type": "open", "a": "What do you have on Mondays?", "e": "星期后加 -s 表示每逢。", "options": []}, {"q": "usually / I / football / play / the / at / weekend (.)", "type": "open", "a": "I usually play football at the weekend.", "e": "频度副词放实义动词前。", "options": []}, {"q": "should / we / every / exercise / day (.)", "type": "open", "a": "We should exercise every day.", "e": "should + 动词原形。", "options": []}, {"q": "you / shouldn't / so / play / often / on a phone (.)", "type": "open", "a": "You shouldn't play on a phone so often.", "e": "shouldn't 后接动词原形。", "options": []}, {"q": "like / would / what / you / eat / to (?)", "type": "open", "a": "What would you like to eat?", "e": "would like to do sth。", "options": []}, {"q": "there / is / a / in / waterfall / the / forest (?)", "type": "open", "a": "Is there a waterfall in the forest?", "e": "There be 变疑问句把 is 提前。", "options": []}, {"q": "many / there / are / trees / the / in / park (.)", "type": "open", "a": "There are many trees in the park.", "e": "复数用 There are。", "options": []}, {"q": "often / she / TV / watches / evening / the / in (.)", "type": "open", "a": "She often watches TV in the evening.", "e": "三单 watches；in the evening。", "options": []}, {"q": "be / careful / the / of / fire (.)", "type": "open", "a": "Be careful of the fire.", "e": "祈使句用动词原形开头。", "options": []}, {"q": "important / it's / listen / to / each / to / other (.)", "type": "open", "a": "It's important to listen to each other.", "e": "It's + 形容词 + to do sth。", "options": []}, {"q": "why / go / not / park / the / to (?)", "type": "open", "a": "Why not go to the park?", "e": "Why not + 动词原形。", "options": []}]}, {"id": "rewrite", "title": "六、按要求改写句子", "tip": "改完检查：主语、时态、标点有没有跟着变。", "items": [{"q": "He can swim.（改为否定句）", "type": "open", "a": "He can't swim.", "e": "can 后加 not。", "options": []}, {"q": "She likes music.（改为一般疑问句）", "type": "open", "a": "Does she like music?", "e": "三单主语用 Does，后面动词还原。", "options": []}, {"q": "There are some apples.（改为否定句）", "type": "open", "a": "There aren't any apples.", "e": "be 后加 not，some 变 any。", "options": []}, {"q": "I play football at the weekend.（对 at the weekend 提问）", "type": "open", "a": "What do you do at the weekend?", "e": "问“做什么”用 What do you do...", "options": []}, {"q": "He is tall and strong.（改为一般疑问句）", "type": "open", "a": "Is he tall and strong?", "e": "be 动词提前。", "options": []}, {"q": "They can make robots.（改为一般疑问句并作肯定回答）", "type": "open", "a": "Can they make robots? Yes, they can.", "e": "Can 提前；肯定回答用 they can。", "options": []}, {"q": "I'd like some beef.（改为一般疑问句）", "type": "open", "a": "Would you like some beef?", "e": "Would 提前；请求句保留 some。", "options": []}, {"q": "She goes to school by bus.（改为否定句）", "type": "open", "a": "She doesn't go to school by bus.", "e": "三单否定用 doesn't，动词还原。", "options": []}, {"q": "There is a river in the park.（改为一般疑问句）", "type": "open", "a": "Is there a river in the park?", "e": "There be 变疑问句把 is 提前。", "options": []}, {"q": "We should play on the phone.（改为否定句）", "type": "open", "a": "We shouldn't play on the phone.", "e": "should 后加 not。", "options": []}, {"q": "He is good at playing chess.（对 playing chess 提问）", "type": "open", "a": "What is he good at?", "e": "问“擅长什么”用 What is he good at?", "options": []}, {"q": "My favourite subject is English.（对 English 提问）", "type": "open", "a": "What's your favourite subject?", "e": "问“最喜欢的科目”用 What's your favourite subject?", "options": []}, {"q": "I have Chinese and maths on Monday.（对 Chinese and maths 提问）", "type": "open", "a": "What do you have on Monday?", "e": "问课程用 What do you have on ...?", "options": []}, {"q": "Tom can play the piano.（改为一般疑问句）", "type": "open", "a": "Can Tom play the piano?", "e": "Can 提到主语前。", "options": []}, {"q": "There are two lakes in the park.（对 two 提问）", "type": "open", "a": "How many lakes are there in the park?", "e": "对数量提问用 How many。", "options": []}]}, {"id": "dialogue", "title": "七、补全对话（选出最佳选项）", "tip": "看答句推问句，看问句推答句。", "items": [{"q": "— You look sad. ______?　— It's about my maths test.", "type": "choice", "options": ["What's your name", "How old are you", "What's the matter"], "a": 2, "e": "What's the matter? 问“怎么了”。"}, {"q": "— ______?　— Yes, I can. I can make a robot.", "type": "choice", "options": ["Do you like robots", "Can you make robots", "Are you a robot"], "a": 1, "e": "回答用 can，问句用 Can you ..."}, {"q": "— What do you usually do at the weekend?　— ______", "type": "choice", "options": ["It's Monday.", "I'm fine, thank you.", "I often play football."], "a": 2, "e": "问做什么，答做什么。"}, {"q": "— ______?　— I have Chinese, maths and PE.", "type": "choice", "options": ["What day is it today", "When do you go to school", "What do you have on Mondays"], "a": 2, "e": "答的是课程。"}, {"q": "— ______?　— I'd like some noodles.", "type": "choice", "options": ["What's your favourite food", "Do you like noodles", "What would you like to eat"], "a": 2, "e": "答句用 I'd like，问句用 What would you like。"}, {"q": "— Can I have some ice cream, please?　— ______", "type": "choice", "options": ["Yes, I like it.", "Yes, but just a little.", "No, I'm fine."], "a": 1, "e": "答应请求并限定数量。"}, {"q": "— ______?　— There is a big lake in the park.", "type": "choice", "options": ["Is it a park", "Where is the park", "What's in the park"], "a": 2, "e": "答句说“公园里有什么”。"}, {"q": "— I have a cold.　— ______", "type": "choice", "options": ["You can eat more ice cream.", "You should drink more water.", "You should play more."], "a": 1, "e": "感冒了应该多喝水。"}, {"q": "— Is there a waterfall in the forest?　— ______", "type": "choice", "options": ["Yes, there are.", "Yes, it is.", "Yes, there is."], "a": 2, "e": "Is there 用 there is 回答。"}, {"q": "— Why don't we go boating?　— ______", "type": "choice", "options": ["You're welcome.", "Good idea!", "Thank you."], "a": 1, "e": "回应建议用 Good idea!"}]}], "readings": [{"id": "en1", "title": "阅读（一）My friend", "from": "", "passage": ["My name is Lily. I have a good friend. Her name is Amy. She is from Australia.", "Amy is tall and strong. She has short hair and big eyes. She is clever and hard-working. She can play the piano, and she can make robots, too. But she can't speak Chinese.", "I often help her with Chinese. After school, we play ping-pong together. I like my friend very much."], "questions": [{"q": "What's Amy like?", "type": "choice", "options": ["She is short and thin.", "She is tall and strong.", "She is old and kind."], "a": 1, "e": "第二段第一句：Amy is tall and strong."}, {"q": "Where is Amy from?", "type": "fill", "options": [], "a": "Australia", "e": ""}, {"q": "Can Amy speak Chinese?", "type": "choice", "options": ["No, she can't.", "Yes, she can.", "We don't know."], "a": 0, "e": "第二段最后一句：But she can't speak Chinese."}, {"q": "Lily often helps Amy with ______.", "type": "fill", "options": [], "a": "Chinese", "e": ""}, {"q": "Why does Lily like Amy? (用一两句话回答)", "type": "open", "options": [], "a": "示例：Because Amy is clever and they often play ping-pong together.", "e": ""}]}, {"id": "en2", "title": "阅读（二）A sad day", "from": "", "passage": ["Today is Monday. Tom is sad. He has a maths test, and he thinks it is hard.", "After school, he talks to his mother. \"Don't worry,\" says his mother. \"You can ask your teacher for help. You can also count to ten and take a deep breath.\"", "Tom listens to his mother. He feels better. In the evening, he finishes his homework and goes to bed early."], "questions": [{"q": "Tom is sad because ______.", "type": "choice", "options": ["he has a maths test", "he is ill", "he lost his book"], "a": 0, "e": "第一段：He has a maths test, and he thinks it is hard."}, {"q": "Who does Tom talk to?", "type": "fill", "options": [], "a": "his mother", "e": ""}, {"q": "What does his mother tell him to do?", "type": "choice", "options": ["To go out to play.", "To watch TV.", "To count to ten."], "a": 2, "e": "母亲建议 he can count to ten and take a deep breath."}, {"q": "At last, Tom feels ______.", "type": "fill", "options": [], "a": "better", "e": ""}, {"q": "What do you do when you are sad? (写一两句)", "type": "open", "options": [], "a": "示例：I talk to my parents and listen to music. Then I feel better.", "e": ""}]}, {"id": "en3", "title": "阅读（三）My weekend", "from": "", "passage": ["I'm Mike. I usually get up at seven on Saturdays.", "In the morning, I do my homework on time. Then I help my mother do chores. In the afternoon, I often play ping-pong with my father. Sometimes I visit my grandparents. They live on a farm. I like to feed the chickens there.", "On Sundays, I have a piano lesson. I think work and play are both important."], "questions": [{"q": "When does Mike get up on Saturdays?", "type": "fill", "options": [], "a": "At seven", "e": ""}, {"q": "What does Mike do in the morning?", "type": "choice", "options": ["He watches TV.", "He does his homework and helps his mother.", "He plays football."], "a": 1, "e": "第二段开头：I do my homework on time. Then I help my mother do chores."}, {"q": "Who does Mike play ping-pong with?", "type": "fill", "options": [], "a": "his father", "e": ""}, {"q": "Where do his grandparents live?", "type": "choice", "options": ["On a farm.", "In a city.", "Near the school."], "a": 0, "e": "文中：They live on a farm."}, {"q": "What do you usually do at the weekend? (写两三句)", "type": "open", "options": [], "a": "示例：I usually do my homework on Saturday morning. In the afternoon, I play basketball with my friends.", "e": ""}]}, {"id": "en4", "title": "阅读（四）Good habits", "from": "", "passage": ["Good habits are important. I get up at six thirty every day.", "I wash my hands before meals. I eat three meals a day, and I eat a lot of vegetables. I drink enough water. I brush my teeth twice a day. After school, I exercise for an hour.", "I shouldn't play on a phone for a long time. Good habits make me strong and happy."], "questions": [{"q": "How often does the writer brush his teeth?", "type": "choice", "options": ["Twice a day.", "Three times a day.", "Once a day."], "a": 0, "e": "文中：I brush my teeth twice a day."}, {"q": "What should we do before meals?", "type": "fill", "options": [], "a": "wash our hands", "e": ""}, {"q": "How long does the writer exercise after school?", "type": "choice", "options": ["For an hour.", "For two hours.", "For half an hour."], "a": 0, "e": "文中：I exercise for an hour."}, {"q": "The writer plays on a phone for a long time.", "type": "choice", "options": ["True.", "We don't know.", "False."], "a": 2, "e": "文中说 I shouldn't play on a phone for a long time."}, {"q": "What healthy habits do you have? (写两三句)", "type": "open", "options": [], "a": "示例：I get up early and eat breakfast every day. I also play basketball after school.", "e": ""}]}, {"id": "en5", "title": "阅读（五）Green Nature Park", "from": "", "passage": ["Welcome to Green Nature Park! There is a big lake in the park. There are many trees and flowers around it. You can go boating on the lake.", "Is there a waterfall in the park? Yes, there is. It is near the mountain. The water is cool. You can take pictures there.", "There are no shops in the park, so please bring some water. Be careful of the fire. Have a good time!"], "questions": [{"q": "What is in the park?", "type": "choice", "options": ["A museum.", "A big lake.", "A zoo."], "a": 1, "e": "第一段：There is a big lake in the park."}, {"q": "Is there a waterfall in the park?", "type": "choice", "options": ["Yes, there is.", "No, there isn't.", "There are two."], "a": 0, "e": "第二段：Is there a waterfall...? Yes, there is."}, {"q": "What can you do on the lake?", "type": "fill", "options": [], "a": "go boating", "e": ""}, {"q": "Why should you bring some water?", "type": "choice", "options": ["Because it is cold.", "Because there are no shops.", "Because the water is dirty."], "a": 1, "e": "第三段：There are no shops in the park, so please bring some water."}, {"q": "Write a welcome sentence for the park. (写一句欢迎语)", "type": "open", "options": [], "a": "示例：Welcome to Green Nature Park! Have a good time!", "e": ""}]}], "essays": ["介绍朋友（My friend）", "说说心情（My feelings）", "我的一天／一周（My week）", "健康习惯（My healthy habits）", "食物（Food I like）", "自然（A nature park）"]};
+const LETTERS = "ABCD";
+const LS = "wsw5_en_2026_v1";
+
+/* ---------------- 存储 ---------------- */
+function load(){
+  try{ return JSON.parse(localStorage.getItem(LS)) || {}; }catch(e){ return {}; }
+}
+let store = load();
+store.wrong = store.wrong || {};
+store.hist = store.hist || [];
+store.cfg = store.cfg || {};
+function save(){ try{ localStorage.setItem(LS, JSON.stringify(store)); }catch(e){} }
+
+/* ---------------- 工具 ---------------- */
+function norm(s){
+  return (s||"").toString().replace(/[\s，。、；：！？“”‘’（）()《》〈〉·—…\-_.,!?;:'"]/g,"").toLowerCase();
+}
+function esc(s){
+  return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function mmss(sec){
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec/60), s = sec%60;
+  return (m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+}
+function shortName(n){
+  return (n||"").replace(/^课内阅读（[^）]*）\s*/,"").replace(/^课外阅读（\d+）\s*/,"").trim() || n;
+}
+function shuffle(a){
+  a = a.slice();
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+/* ---------------- 题目索引 ---------------- */
+const ALL = [];
+DATA.sections.forEach(sec=>{
+  sec.items.forEach((it,i)=>{
+    ALL.push({key:"base#"+sec.id+"#"+i, kind:"base", group:"base", chapter:sec.title,
+              chapterId:sec.id, it:it, passage:null, from:""});
+  });
+});
+DATA.readings.forEach(r=>{
+  const g = r.id.indexOf("x")===0 ? "out" : "in";
+  r.questions.forEach((q,i)=>{
+    ALL.push({key:"read#"+r.id+"#"+i, kind:"read", group:g, chapter:r.title,
+              chapterId:r.id, it:q, passage:r.passage, from:r.from||""});
+  });
+});
+
+const GROUPS = {
+  all:{name:"全部", items:ALL},
+  base:{name:"基础题", items:ALL.filter(x=>x.group==="base")},
+  in:{name:"课内阅读", items:ALL.filter(x=>x.group==="in")},
+  out:{name:"课外阅读", items:ALL.filter(x=>x.group==="out")},
+  wrong:{name:"错题本", items:ALL.filter(x=>store.wrong[x.key])}
+};
+
+function chaptersOf(group){
+  const m = new Map();
+  ALL.filter(x=>group==="all" || x.group===group).forEach(x=>{
+    if(!m.has(x.chapterId)) m.set(x.chapterId,{id:x.chapterId,name:x.chapter,count:0});
+    m.get(x.chapterId).count++;
+  });
+  return Array.from(m.values());
+}
+
+/* ---------------- 状态 ---------------- */
+let view = "setup";       // setup | practice | result
+let tab = "practice";     // practice | browse | wrong | about
+let cfg = Object.assign({group:"all", chapters:[], count:"20", order:"random", timer:"up", minutes:20}, store.cfg||{});
+let session = null;       // {queue, i, given:{}, startedAt, left, timerId, finishedAt}
+
+/* ---------------- 计时 ---------------- */
+function startTimer(){
+  if(cfg.timer==="none") return;
+  session.tickStart = Date.now();
+  session.left = cfg.timer==="down" ? cfg.minutes*60 : 0;
+  session.timerId = setInterval(()=>{
+    if(cfg.timer==="down"){
+      session.left--;
+      if(session.left<=0){ session.left=0; stopTimer(); finish(); }
+    }else{
+      session.left = Math.round((Date.now()-session.tickStart)/1000);
+    }
+    const el = document.getElementById("timer");
+    if(el){ el.textContent = mmss(session.left); if(cfg.timer==="down" && session.left<=60) el.classList.add("warn"); }
+  },1000);
+}
+function stopTimer(){ if(session && session.timerId){ clearInterval(session.timerId); session.timerId=null; } }
+
+/* ---------------- 渲染入口 ---------------- */
+const main = document.getElementById("main");
+const TABS = [
+  {id:"practice", name:"练习"},
+  {id:"browse", name:"题目浏览"},
+  {id:"wrong", name:"错题本"},
+  {id:"about", name:"说明"}
+];
+function renderTabs(){
+  const t = document.getElementById("tabs");
+  t.innerHTML = TABS.map(x=>`<button data-tab="${x.id}" class="${x.id===tab?'on':''}">${x.name}</button>`).join("");
+  t.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    if(view==="practice"){ if(!confirm("正在练习中，确定退出吗？")) return; stopTimer(); }
+    tab = b.dataset.tab; view = "setup"; renderTabs(); render(); window.scrollTo({top:0});
+  });
+  document.getElementById("title").textContent = tab==="practice" ? "五上英语 · 在线练习" : "五上英语 · " + (TABS.find(x=>x.id===tab)||{}).name;
+}
+document.getElementById("btn-reset").onclick = ()=>{
+  if(confirm("清空全部记录（错题本、历史成绩）？")){ store = {wrong:{},hist:[],cfg:cfg}; save(); render(); }
+};
+
+function render(){
+  main.innerHTML = "";
+  if(tab==="practice"){
+    if(view==="setup") renderSetup();
+    else if(view==="practice") renderPractice();
+    else renderResult();
+  } else if(tab==="browse") renderBrowse();
+  else if(tab==="wrong") renderWrong();
+  else renderAbout();
+}
+
+/* ---------------- 设置页 ---------------- */
+function renderSetup(){
+  const wrongN = ALL.filter(x=>store.wrong[x.key]).length;
+  main.innerHTML = `
+    <h2 class="t">开始练习</h2>
+    <p class="tip">先选范围和章节，再开始。做错的题会自动进错题本。</p>
+
+    <div class="card">
+      <div class="fld">
+        <label>练习范围</label>
+        <div class="seg" id="seg-group">
+          ${["all","base","in","wrong"].map(g=>{
+            const names = {all:"全部", base:"题型", "in":"阅读", wrong:"只练错题"};
+            const n = g==="wrong" ? wrongN : GROUPS[g].items.length;
+            return `<button data-g="${g}" class="${cfg.group===g?'on':''}" ${n===0?'disabled':''}>${names[g]}</button>`;
+          }).join("")}
+        </div>
+      </div>
+      <div class="fld" id="fld-chapters">
+        <label>章节（不选＝全部）</label>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="fld">
+        <label>题量</label>
+        <select id="sel-count">
+          <option value="10">10 题</option><option value="20">20 题</option>
+          <option value="30">30 题</option><option value="50">50 题</option>
+          <option value="all">全部</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>顺序</label>
+        <div class="seg" id="seg-order">
+          <button data-o="random" class="${cfg.order==='random'?'on':''}">随机</button>
+          <button data-o="seq" class="${cfg.order==='seq'?'on':''}">按顺序</button>
+        </div>
+      </div>
+      <div class="fld">
+        <label>计时</label>
+        <div class="seg" id="seg-timer">
+          <button data-t="up" class="${cfg.timer==='up'?'on':''}">正计时</button>
+          <button data-t="down" class="${cfg.timer==='down'?'on':''}">倒计时</button>
+          <button data-t="none" class="${cfg.timer==='none'?'on':''}">不计时</button>
+        </div>
+      </div>
+      <div class="fld" id="fld-minutes" style="display:none">
+        <label>倒计时时长</label>
+        <div class="seg" id="seg-min">
+          <button data-m="10">10 分钟</button><button data-m="20">20 分钟</button><button data-m="30">30 分钟</button>
+        </div>
+      </div>
+      <button class="primary" id="btn-start">开 始 练 习</button>
+      <div class="row" style="margin-top:10px;justify-content:center">
+        <span class="tip" id="sum" style="margin:0"></span>
+      </div>
+    </div>
+    ${store.hist.length? `<div class="card"><div class="fld"><label>最近成绩</label>${store.hist.slice(0,5).map(h=>
+      `<div class="hist">${h.date}　${h.right}/${h.total}　用时 ${mmss(h.sec)}　${h.group}</div>`).join("")}</div></div>`:""}
+  `;
+
+  document.querySelectorAll("#seg-group button").forEach(b=>b.onclick=()=>{
+    cfg.group = b.dataset.g; cfg.chapters = []; save(); renderSetup();
+  });
+  document.querySelectorAll("#seg-order button").forEach(b=>b.onclick=()=>{
+    cfg.order = b.dataset.o; save(); renderSetup();
+  });
+  document.querySelectorAll("#seg-timer button").forEach(b=>b.onclick=()=>{
+    cfg.timer = b.dataset.t; save(); renderSetup();
+  });
+  document.querySelectorAll("#seg-min button").forEach(b=>b.onclick=()=>{
+    cfg.minutes = +b.dataset.m; save(); renderSetup();
+  });
+  document.getElementById("sel-count").value = cfg.count;
+  document.getElementById("sel-count").onchange = e=>{ cfg.count = e.target.value; save(); };
+
+  // 章节 chips
+  const chips = document.getElementById("chips");
+  const chs = chaptersOf(cfg.group==="wrong" ? "all" : cfg.group);
+  const scope = cfg.group==="wrong" ? ALL.filter(x=>store.wrong[x.key]) : GROUPS[cfg.group].items;
+  const visible = new Map();
+  chs.forEach(c=>{
+    const n = scope.filter(x=>x.chapterId===c.id).length;
+    if(n>0) visible.set(c.id, {name:c.name, count:n});
+  });
+  if(cfg.group==="wrong"){ document.getElementById("fld-chapters").style.display = visible.size? "" : "none"; }
+  chips.innerHTML = Array.from(visible.entries()).map(([id,v])=>
+    `<div class="chip ${cfg.chapters.includes(id)?"on":""}" data-c="${id}">${esc(shortName(v.name))}<small>${v.count}</small></div>`
+  ).join("");
+  chips.querySelectorAll(".chip").forEach(el=>el.onclick=()=>{
+    const id = el.dataset.c;
+    if(cfg.chapters.includes(id)) cfg.chapters = cfg.chapters.filter(x=>x!==id);
+    else cfg.chapters.push(id);
+    save();
+    el.classList.toggle("on");
+    updateSum();
+  });
+
+  document.getElementById("fld-minutes").style.display = cfg.timer==="down" ? "" : "none";
+  document.querySelectorAll("#seg-min button").forEach(b=>{
+    b.classList.toggle("on", +b.dataset.m === cfg.minutes);
+  });
+
+  function candidates(){
+    let pool = cfg.group==="wrong" ? ALL.filter(x=>store.wrong[x.key]) : GROUPS[cfg.group].items;
+    if(cfg.chapters.length) pool = pool.filter(x=>cfg.chapters.includes(x.chapterId));
+    return pool;
+  }
+  function updateSum(){
+    const n = candidates().length;
+    const take = cfg.count==="all" ? n : Math.min(n, +cfg.count);
+    const el = document.getElementById("sum");
+    if(el) el.textContent = n ? `本次将练习 ${take} 题（可选 ${n} 题）` : "这个范围里没有题目";
+    const btn = document.getElementById("btn-start");
+    if(btn) btn.disabled = n===0;
+  }
+  updateSum();
+  document.getElementById("btn-start").onclick = ()=>{
+    const pool = candidates();
+    if(!pool.length) return;
+    let q = cfg.order==="random" ? shuffle(pool) : pool.slice();
+    if(cfg.count!=="all") q = q.slice(0, +cfg.count);
+    startSession(q);
+  };
+}
+
+/* ---------------- 练习页 ---------------- */
+function startSession(queue){
+  session = {queue:queue, i:0, given:{}, startedAt:Date.now(), left:0, timerId:null, graded:{}};
+  view = "practice";
+  render();
+  startTimer();
+}
+
+function renderPractice(){
+  const s = session;
+  if(!s) { view="setup"; return render(); }
+  const cur = s.queue[s.i];
+  const it = cur.it;
+  const total = s.queue.length;
+  const pct = Math.round((s.i)/total*100);
+
+  const passage = cur.passage ? `
+    <details class="passage" ${cur.passage.length<=3?"open":""}>
+      <summary>阅读材料（点开／收起）</summary>
+      <div class="body">${cur.passage.map(p=>`<p>${esc(p)}</p>`).join("")}
+      ${cur.from?`<p style="text-indent:0;text-align:right;font-size:12.5px;color:var(--sub)">—— ${esc(cur.from)}</p>`:""}</div>
+    </details>` : "";
+
+  main.innerHTML = `
+    <div class="pstat">
+      <span>第 ${s.i+1} / ${total} 题</span>
+      <span class="timer" id="timer" style="${cfg.timer==='none'?'display:none':''}">${mmss(s.left)}</span>
+    </div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    ${passage}
+    <div class="card">
+      <p class="q"><span class="qno">${s.i+1}.</span>${esc(it.q)}</p>
+      <div id="answerArea"></div>
+      <div class="fb" id="fb"></div>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:4px">
+      <button class="ghost" id="btn-quit">退出</button>
+      <button class="ghost" id="btn-next" disabled>下一题 →</button>
+    </div>
+    <p class="tip" style="text-align:center">${cur.kind==="read"?"":"　"}</p>
+  `;
+
+  const area = document.getElementById("answerArea");
+  const fb = document.getElementById("fb");
+  const nextBtn = document.getElementById("btn-next");
+
+  if(it.type==="choice"){
+    const wrap = document.createElement("div"); wrap.className="opts";
+    it.options.forEach((o,k)=>{
+      const d = document.createElement("div");
+      d.className = "opt"; d.dataset.k = k;
+      d.innerHTML = `<span class="k">${LETTERS[k]}</span><span>${esc(o)}</span>`;
+      d.onclick = ()=>{
+        if(fb.classList.contains("show")) return;
+        wrap.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel"));
+        d.classList.add("sel");
+        s.given[cur.key] = k;
+      };
+      wrap.appendChild(d);
+    });
+    area.appendChild(wrap);
+    const check = document.createElement("button");
+    check.className="primary"; check.style.marginTop="12px"; check.textContent="确认答案";
+    check.onclick = ()=>{
+      const g = s.given[cur.key];
+      if(g===undefined){ alert("先选一个答案"); return; }
+      const ok = g===it.a;
+      s.graded[cur.key]=ok;
+      wrap.querySelectorAll(".opt").forEach(x=>x.classList.remove("right","wrong"));
+      wrap.querySelector(`.opt[data-k="${it.a}"]`).classList.add("right");
+      if(!ok) wrap.querySelector(`.opt[data-k="${g}"]`).classList.add("wrong");
+      fb.className = "fb show " + (ok?"ok":"no");
+      fb.textContent = (ok?"✔ 正确。":"✘ 正确答案："+LETTERS[it.a]+"。") + (it.e?("　"+it.e):"");
+      check.disabled = true;
+      nextBtn.disabled = false;
+      markWrong(cur.key, !ok);
+    };
+    area.appendChild(check);
+  } else if(it.type==="fill"){
+    const inp = document.createElement("input");
+    inp.className="fill"; inp.placeholder="在这里写答案";
+    area.appendChild(inp);
+    const check = document.createElement("button");
+    check.className="primary"; check.style.marginTop="12px"; check.textContent="确认答案";
+    check.onclick = ()=>{
+      if(!inp.value.trim()){ alert("先写答案"); return; }
+      const ok = norm(inp.value)===norm(it.a);
+      s.graded[cur.key]=ok;
+      s.given[cur.key]=inp.value;
+      fb.className="fb show "+(ok?"ok":"no");
+      fb.textContent=(ok?"✔ 正确。":"✘ 参考答案："+it.a+"　")+(it.e||"");
+      check.disabled=true; inp.disabled=true;
+      nextBtn.disabled=false;
+      markWrong(cur.key, !ok);
+    };
+    area.appendChild(check);
+  } else {
+    const ta = document.createElement("textarea");
+    ta.className="open"; ta.placeholder="先自己写一写，再看参考答案（不写也会算答错）";
+    area.appendChild(ta);
+    const b1 = document.createElement("button");
+    b1.className="ghost"; b1.style.marginTop="10px"; b1.textContent="看参考答案";
+    b1.onclick = ()=>{
+      fb.className="fb show ref";
+      fb.textContent="参考答案："+it.a;
+      gradeRow();
+    };
+    area.appendChild(b1);
+    const row = document.createElement("div"); row.className="row"; row.style.marginTop="10px";
+    area.appendChild(row);
+    function gradeRow(){
+      if(row.dataset.done) return;
+      row.dataset.done="1";
+      row.innerHTML = "";
+      const ok = document.createElement("button");
+      ok.className="primary"; ok.style.flex="1"; ok.textContent="我写对了";
+      ok.onclick = ()=>{ s.graded[cur.key]=true; s.given[cur.key]=ta.value; markWrong(cur.key,false);
+        row.innerHTML="<span class='tip'>已记为答对</span>"; nextBtn.disabled=false; };
+      const no = document.createElement("button");
+      no.className="ghost"; no.style.flex="1"; no.textContent="没写对";
+      no.onclick = ()=>{ s.graded[cur.key]=false; s.given[cur.key]=ta.value; markWrong(cur.key,true);
+        row.innerHTML="<span class='tip'>已记为答错，已进错题本</span>"; nextBtn.disabled=false; };
+      row.appendChild(ok); row.appendChild(no);
+    }
+  }
+
+  nextBtn.onclick = ()=>{
+    if(s.i+1 >= s.queue.length){ finish(); }
+    else { s.i++; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+  };
+  document.getElementById("btn-quit").onclick = ()=>{
+    if(confirm("确定退出本次练习？已答的题会保存到错题本。")){ stopTimer(); view="setup"; render(); }
+  };
+  document.getElementById("timer").textContent = mmss(s.left);
+}
+
+function markWrong(key, isWrong){
+  if(isWrong) store.wrong[key] = 1;
+  else delete store.wrong[key];
+  save();
+}
+
+/* ---------------- 结果页 ---------------- */
+function finish(){
+  stopTimer();
+  const s = session;
+  const total = s.queue.length;
+  const answeredCount = Object.keys(s.graded).length;
+  // 没作答的按答错处理，一并进错题本
+  s.queue.forEach(function(x){ if(s.graded[x.key]===undefined){ s.graded[x.key]=false; store.wrong[x.key]=1; } });
+  const right = s.queue.filter(function(x){ return s.graded[x.key]===true; }).length;
+  const sec = Math.round((Date.now()-s.startedAt)/1000);
+  const groupName = GROUPS[cfg.group] ? GROUPS[cfg.group].name : "全部";
+  s.sec = sec; s.right = right; s.total = total; s.answered = answeredCount;
+  store.hist.unshift({date:new Date().toLocaleString("zh-CN",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),
+                      right:right, total:total, sec:sec, group:groupName});
+  store.hist = store.hist.slice(0,30);
+  save();
+  view = "result";
+  renderResult();
+}
+
+function renderResult(){
+  const s = session;
+  if(!s){ view="setup"; render(); return; }
+  const total = s.total || s.queue.length;
+  const answered = s.answered || 0;
+  const right = s.right || 0;
+  const sec = s.sec || 0;
+  const rate = total ? Math.round(right/total*100) : 0;
+  main.innerHTML = `
+    <h2 class="t">本次结果</h2>
+    <p class="tip">共 ${total} 题${answered<total?`，作答 ${answered} 题（未答按错计入错题本）`:"，全部作答"}</p>
+    <div class="res">
+      <div><b>${right}</b><span>答对</span></div>
+      <div><b>${mmss(sec)}</b><span>用时</span></div>
+      <div><b>${rate}%</b><span>正确率</span></div>
+    </div>
+    <div class="card">
+      <div class="fld"><label>逐题回顾</label>
+        <div class="rlist" id="rlist"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:12px">
+      <button class="primary" id="btn-again" style="flex:1">再练一组</button>
+      <button class="ghost" id="btn-wrong" style="flex:1">只练这次错的</button>
+    </div>
+    <p class="tip" style="text-align:center">错题已自动收进「错题本」，下次可以单选它练。</p>
+  `;
+  const list = document.getElementById("rlist");
+  s.queue.forEach(function(cur){
+    const ok = s.graded[cur.key];
+    const d = document.createElement("div");
+    d.className = "ritem " + (ok===true?"ok":"no");
+    const ansTxt = cur.it.type==="choice" ? LETTERS[cur.it.a] + ". " + cur.it.options[cur.it.a] : cur.it.a;
+    d.innerHTML = '<div class="mark">'+(ok===true?"✔":"✘")+'</div>'
+      + '<div class="txt">'+esc(cur.it.q)+'<div class="ans">答案：'+esc(String(ansTxt).slice(0,80))+'</div></div>';
+    list.appendChild(d);
+  });
+  document.getElementById("btn-again").onclick = function(){ view="setup"; session=null; render(); };
+  document.getElementById("btn-wrong").onclick = function(){
+    const q = s.queue.filter(function(x){ return s.graded[x.key]===false; });
+    if(!q.length){ alert("这次没有错题，厉害！"); return; }
+    startSession(q);
+  };
+  window.scrollTo({top:0});
+}
+
+/* ---------------- 浏览 ---------------- */
+function renderBrowse(){
+  main.innerHTML = `<h2 class="t">题目浏览</h2><p class="tip">看题 + 看答案，不做判分。要练题请到「练习」。</p>`;
+  DATA.sections.forEach(sec=>{
+    const h = document.createElement("div"); h.className="card";
+    h.innerHTML = `<div class="fld"><label>${esc(sec.title)}</label></div>`;
+    sec.items.forEach((it,i)=>{
+      const d = document.createElement("div");
+      d.style.padding = "8px 0"; d.style.borderBottom = "1px dashed var(--line)";
+      const ans = it.type==="choice" ? LETTERS[it.a] + ". " + it.options[it.a] : it.a;
+      d.innerHTML = `<div>${i+1}. ${esc(it.q)}</div>
+        ${it.type==="choice"?`<div class="tip" style="margin:2px 0 0">${it.options.map((o,k)=>LETTERS[k]+". "+esc(o)).join("　")}</div>`:""}
+        <div class="ans" style="font-size:12.5px;color:var(--green);margin-top:3px;display:none">答案：${esc(String(ans))}${it.e?"　"+esc(it.e):""}</div>
+        <button class="ghost" style="margin-top:6px;font-size:12px;padding:4px 10px">显示答案</button>`;
+      const btn = d.querySelector("button"), ansEl = d.querySelector(".ans");
+      btn.onclick = ()=>{ ansEl.style.display="block"; btn.style.display="none"; };
+      h.appendChild(d);
+    });
+    main.appendChild(h);
+  });
+}
+
+/* ---------------- 错题本 ---------------- */
+function renderWrong(){
+  const list = ALL.filter(x=>store.wrong[x.key]);
+  main.innerHTML = `<h2 class="t">错题本（${list.length}）</h2>
+    <p class="tip">做错的题会自动进来，做对一次就移出。</p>`;
+  if(!list.length){
+    main.innerHTML += `<div class="empty">还没有错题。<br>去「练习」做一组吧。</div>`;
+    return;
+  }
+  const byCh = new Map();
+  list.forEach(x=>{
+    if(!byCh.has(x.chapter)) byCh.set(x.chapter, []);
+    byCh.get(x.chapter).push(x);
+  });
+  byCh.forEach((arr, name)=>{
+    const c = document.createElement("div"); c.className="card";
+    c.innerHTML = `<div class="fld"><label>${esc(name)}　${arr.length} 题</label></div>`;
+    arr.forEach(x=>{
+      const d = document.createElement("div");
+      d.style.padding="8px 0"; d.style.borderBottom="1px dashed var(--line)";
+      const ans = x.it.type==="choice" ? LETTERS[x.it.a]+". "+x.it.options[x.it.a] : x.it.a;
+      d.innerHTML = `<div>${esc(x.it.q)}</div>
+        <div style="font-size:12.5px;color:var(--green);margin-top:3px">答案：${esc(String(ans))}</div>
+        ${x.it.e?`<div style="font-size:12.5px;color:var(--sub);margin-top:2px">${esc(x.it.e)}</div>`:""}`;
+      c.appendChild(d);
+    });
+    main.appendChild(c);
+  });
+  const row = document.createElement("div"); row.className="row";
+  const b = document.createElement("button"); b.className="primary"; b.textContent="只练这些错题";
+  b.onclick = ()=>{ startSession(shuffle(list)); tab="practice"; renderTabs(); };
+  row.appendChild(b); main.appendChild(row);
+}
+
+/* ---------------- 说明 ---------------- */
+function renderAbout(){
+  main.innerHTML = `
+    <h2 class="t">说明</h2>
+    <div class="card">
+      <p><b>范围怎么选</b><br>英语按题型分小节：语音、词汇、单选、情景交际、连词成句、改写句子、补全对话；阅读按篇目分。选「全部」就是混合练。</p>
+      <p><b>题量与顺序</b><br>随机＝每次都打乱，适合检测；按顺序＝按章节顺序，适合过一遍。</p>
+      <p><b>计时</b><br>正计时看自己用了多久；倒计时到 0 自动收卷；不计时就慢慢做。</p>
+      <p><b>错题本</b><br>选择题、填空题答错，或简答题自评「没写对」，都会进错题本；同一题做对一次就移出。</p>
+      <p><b>记录</b><br>成绩存在本机浏览器，换设备或清缓存会丢。</p>
+    </div>
+    <div class="card">
+      <p><b>题目来源</b><br>按小学英语期末考试常见题型自编，共 ${ALL.length} 题；阅读短文为原创。</p>
+      <p style="color:var(--sub);font-size:13px">版本 v2 · 2026 秋新版五上</p>
+    </div>`;
+}
+
+/* ---------------- 启动 ---------------- */
+renderTabs();
+render();
+</script>
+</body>
+</html>
